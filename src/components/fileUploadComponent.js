@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Loading from './loadingComponent';
+import '../styles/fileUpload.css'; 
 
 function Upload() {
   const [file, setFile] = useState(null);
@@ -42,15 +43,15 @@ function Upload() {
   };
 
   return (
-    <div>
+    <div className="upload-container">
       <input type="file" accept=".xlsx" onChange={handleFileChange} />
-      <button onClick={handleCalculate}>Calculate</button>
+      <button className="calculate-button" onClick={handleCalculate}>Calculate</button>
       
       {isLoading && <Loading />}
-          
+
       {downloadLink && (
         <p>
-          <a href={downloadLink} download>
+          <a href={downloadLink} download className="download-link">
             Download Calculated File
           </a>
         </p>
