@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    font-size: 16px; /* Increase font size for better visibility on smaller screens */
   }
   
   .loading-spinner {
@@ -19,3 +20,11 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+  
+  /* Media query for screens with a maximum width of 600px (adjust as needed) */
+  @media (max-width: 600px) {
+    .loading-container {
+      font-size: 14px; /* Further increase font size for very small screens if needed */
+    }
+  }
+  
