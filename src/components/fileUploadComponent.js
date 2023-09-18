@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import Loading from './loadingComponent';
 
 function Upload() {
   const [file, setFile] = useState(null);
   const [downloadLink, setDownloadLink] = useState('');
+  const [isLoading, setIsLoading] = useState(false); 
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -15,6 +17,7 @@ function Upload() {
   const apiUrl = process.env.REACT_APP_API_URL 
 
     try {
+      setIsLoading(true);      
       const response = await fetch(`${apiUrl}/upload`, {
         method: 'POST',
         body: formData,
@@ -33,6 +36,8 @@ function Upload() {
       }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,6 +45,9 @@ function Upload() {
     <div>
       <input type="file" accept=".xlsx" onChange={handleFileChange} />
       <button onClick={handleCalculate}>Calculate</button>
+      
+      {isLoading && <Loading />}
+          
       {downloadLink && (
         <p>
           <a href={downloadLink} download>
